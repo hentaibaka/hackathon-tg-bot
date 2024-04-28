@@ -15,3 +15,5 @@
 ```
 @digital_break_test_bot
 ```
+## Структура БД:
+![image](https://github.com/hentaibaka/hackathon-tg-bot/assets/61946499/47dd430c-714c-4644-b15f-bc23414820ce)
