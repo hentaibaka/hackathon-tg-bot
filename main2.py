@@ -35,7 +35,7 @@ async def handle_response(update: Update, context: CallbackContext) -> None:
         await ask_question(update, context)
 
 def main() -> None:
-    application = Application.builder().token('6745658806:AAGSRjiG_UuQC_xz-YLRdY2Pwt08PwG4NQU').build()
+    application = Application.builder().token('6671761856:AAHrduKeCz34O4RUg01b9BkXnk545tzDjak').build()
     application.add_handler(CommandHandler('start', start))
     # Разделяем обработку сообщений на две разные функции
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND & filters.Regex('^(' + '|'.join(kb.COURSES) + ')$'), handle_course_selection))
