@@ -1,17 +1,27 @@
 from telegram import ReplyKeyboardMarkup
+import requests as r
+
+from config import BACKEND
+
 
 # Список курсов
-COURSES = ["Курс 1", "Курс 2", "Курс 3", "Курс 4", "Курс 5"]
+def get_courses():
+    courses = r.get(BACKEND + '/courses')
+    if courses.status_code == 200:
+        courses = courses.json()
+    return courses
 
 # Словарь вопросов по курсам
-QUESTIONS = {
-    "Курс 1": ["Вопрос 1", "Вопрос 2", "Вопрос 3", "Вопрос 4", "Вопрос 5"],
-    "Курс 2": ["Вопрос 1", "Вопрос 2", "Вопрос 3", "Вопрос 4", "Вопрос 5"],
-    "Курс 3": ["Вопрос 1", "Вопрос 2", "Вопрос 3", "Вопрос 4", "Вопрос 5"],
-    "Курс 4": ["Вопрос 1", "Вопрос 2", "Вопрос 3", "Вопрос 4", "Вопрос 5"],
-    "Курс 5": ["Вопрос 1", "Вопрос 2", "Вопрос 3", "Вопрос 4", "Вопрос 5"]
-}
+def get_questions():
+    questions = r.get(BACKEND + '/questions')
+    if questions.status_code == 200:
+        questions = questions.json()
+    return questions
 
 # Функция для создания клавиатуры с курсами
 def course_keyboard():
-    return ReplyKeyboardMarkup([[course] for course in COURSES], resize_keyboard=True, one_time_keyboard=True)
+    #return ReplyKeyboardMarkup([[course] for course in COURSES], resize_keyboard=True, one_time_keyboard=True)
+
+    courses = get_courses()
+    return ReplyKeyboardMarkup([[course['name']] for course in courses], resize_keyboard=True, one_time_keyboard=True)
+    
